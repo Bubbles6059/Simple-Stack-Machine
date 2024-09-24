@@ -1,5 +1,4 @@
-# $Id: Makefile,v 1.51 2024/09/09 17:36:28 leavens Exp leavens $
-# Makefile for PL/0 compiler and code generation
+# $Id: Makefile,v 1.58 2024/09/24 20:35:27 leavens Exp leavens $
 
 # Add .exe to the end of target to get that suffix in the rules
 VM = vm
@@ -9,6 +8,7 @@ CC = gcc
 CFLAGS = -g -std=c17 -Wall
 MV = mv
 RM = rm -f
+CHMOD = chmod
 SUBMISSIONZIPFILE = submission.zip
 ZIP = zip -9
 # Add the names of your own files with a .o suffix to link them into the VM
@@ -29,6 +29,8 @@ STUDENTTESTOUTPUTS = $(TESTS:.bof=.myo)
 # if you add more tests, you can add more to this list,
 # or just add to TESTS above
 STUDENTTESTLISTINGS = $(TESTS:.bof=.myp)
+# Don't remove these outputs if there are errors
+.PRECIOUS: $(STUDENTTESTOUTPUTS) $(STUDENTTESTLISTINGS)
 
 # create the VM executable
 .PRECIOUS: $(VM)
@@ -40,12 +42,15 @@ $(VM): $(VM_OBJECTS)
 %.o: %.c %.h
 	$(CC) $(CFLAGS) -c $<
 
-.PHONY: clean
+.PHONY: clean cleanall
 clean:
 	$(RM) *~ *.o *.myo *.myp '#'*
 	$(RM) $(VM).exe $(VM)
 	$(RM) *.stackdump core
 	$(RM) $(SUBMISSIONZIPFILE)
+
+cleanall: clean
+	$(RM) $(ASM).exe $(DISASM).exe test.exe $(BOF_BIN_DUMP).exe
 
 # rule for making .bof files with the assembler ($(ASM));
 # this might need to be done if not running on Linux (or Windows)
@@ -248,14 +253,20 @@ PROVIDEDFILES = Makefile asm_main.c asm.y asm_lexer.l \
 		vm_test*.asm vm_test*.out vm_test*.bof vm_test*.lst \
 		bof_bin_dump.c
 
+PDFFILES = ../../ssm-vm.pdf ../../ssm-asm.pdf
+
 .PHONY: zip $(ZIPFILE)
 
 zip $(ZIPFILE): $(TESTSZIPFILE)
 
-$(TESTSZIPFILE): Makefile $(TESTS) $(PROVIDEDFILES) $(VM) create-vm-outputs
+$(TESTSZIPFILE): $(PDFFILES) Makefile $(TESTS) $(PROVIDEDFILES) $(VM) create-vm-outputs
 	$(RM) $(TESTSZIPFILE)
-	chmod u+w Makefile $(TESTS) $(PROVIDEDFILES)
-	$(ZIP) $(TESTSZIPFILE) Makefile $(TESTS) $(PROVIDEDFILES)
+	$(CHMOD) a-w *.lst *.asm *.bof *.lst *.[ch] \
+		$(EXPECTEDOUTPUTS) $(EXPECTEDLISTINGS)
+	$(CHMOD) a+r Makefile $(TESTS) $(PROVIDEDFILES)
+	$(CHMOD) u+w Makefile asm.tab.h asm.tab.c
+	$(ZIP) $(TESTSZIPFILE) $(PDFFILES) Makefile $(TESTS) $(PROVIDEDFILES)
+	$(CHMOD) u+rw Makefile $(TESTS) $(PROVIDEDFILES) *.[ch]
 
 %.bof: %.$(ASM)
 	./$(ASM) $<

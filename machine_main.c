@@ -40,7 +40,10 @@ int main(int argc, char** argv)
 
         for(int i = 0; i < bofHeader.text_length; i++) 
         {
-            printf("%d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
+            printf("\t%d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
+        }
+        for(int i = 0; i < bofHeader.data_length; i++) {
+            printf("\t%d: %d", bofHeader.data_start_address + i, bof_read_word(boffile));
         }
         //bin_instr_t instruct = instruction_read(boffile);
         

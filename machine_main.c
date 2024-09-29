@@ -8,6 +8,8 @@
 #define LO 0
 #define HI 1
 
+// testing push by alyssa
+
 // memory size 2^16 words
 #define MEMORY_SIZE_IN_WORDS 32768
 

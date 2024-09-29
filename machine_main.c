@@ -46,6 +46,8 @@ int main(int argc, char** argv)
             printf("\t%d: %d", bofHeader.data_start_address + i, bof_read_word(boffile));
         }
         //bin_instr_t instruct = instruction_read(boffile);
+
+        // cut off after 2 consecutive zeros
         
     }
     return 0;

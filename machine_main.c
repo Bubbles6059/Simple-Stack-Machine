@@ -2,8 +2,14 @@
 #include "instruction.h"
 #include "machine_types.h"
 #include "string.h"
+#include "regname.h"
+#include <math.h>
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "utilities.h"
+#include <stdbool.h>
+
 
 // memory size 2^16 words
 #define MEMORY_SIZE_IN_WORDS 32768
@@ -12,10 +18,12 @@
 
 // *** add comment ***
 static union mem_u {
-word_type words[MEMORY_SIZE_IN_WORDS];
-uword_type uwords[MEMORY_SIZE_IN_WORDS];
-bin_instr_t instrs[MEMORY_SIZE_IN_WORDS];
+	word_type words[MEMORY_SIZE_IN_WORDS];
+	uword_type uwords[MEMORY_SIZE_IN_WORDS];
+	bin_instr_t instrs[MEMORY_SIZE_IN_WORDS];
 } memory;
+
+
 
 // processing arguments
 char* findFileName(int arraySize, char** stringArray);
@@ -56,7 +64,7 @@ int main(int argc, char** argv)
             memory.instrs[i] = instruction_read(boffile);
         }
 
-        // *** add in \n after 57 char here ***
+        // *** add in \n after 59 char here ***
 
         printf("Address Instruction\n");
 
@@ -84,11 +92,13 @@ int main(int argc, char** argv)
             machine_execute_instr(bin_instr_t bi) in machine.c
         */
 
-        // *** add in \n after 57 char here ***
+        // *** add in \n after 59 char here ***
 
         for(int i = 0; i < bofHeader.text_length; i++) 
         {
-            printf("        PC: %d\n", i);
+			address_type PC = PC + BYTES_PER_WORD;
+			word_type GPR = malloc(sizeof(word_type) * 32);
+            printf("        PC: %d\n", PC);
             // *** print GPR[$gp, $sp, $fp, $r3, $r4, $r5, $r6, $ra] here ***
             /*  
                 references 
@@ -96,7 +106,30 @@ int main(int argc, char** argv)
                 regname_get                 regname.c 
 
             */
-
+            bin_instr_t instruct = memory.instrs[i];
+            /*
+            instruct.comp;
+            instruct.immed;
+            instruct.jump;
+            instruct.othc;
+            instruct.syscall;
+            instruct.uimmed;
+            */
+            instr_type it = instruction_type(instruct);
+            switch (it) 
+            {
+                case comp_instr_type:
+	            {
+	                comp_instr_t co = instruct.comp;
+	                switch (co.func) {
+					//look tomorrow
+	                case ADD_F:
+						memory.words[GPR[co.ot]]
+					break;
+	                }
+	            }
+			break;
+    }
             printf("\n");
             printf("==> %6d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
         }

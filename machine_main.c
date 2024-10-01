@@ -123,9 +123,14 @@ int main(int argc, char** argv)
                 case comp_instr_type:
 	            {
 	                comp_instr_t co = instruct.comp;
+					word_type t = instruct.comp.rt;
+					word_type s = instruct.comp.rs;
+					offset_type ot = instruct.comp.ot;
+					offset_type os = instruct.comp.os;
+
 	                switch (co.func) {
 	                case ADD_F:
-						memory.words[]
+						memory.words[GPR[t] + ot] = memory.words[GPR[1]] + memory.words[GPR[s] + os];
 					break;
 
 					case SUB_F:

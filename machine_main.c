@@ -13,8 +13,6 @@
 
 // memory size 2^16 words
 #define MEMORY_SIZE_IN_WORDS 32768
-#define LO 0
-#define HI 1
 
 // *** add comment ***
 static union mem_u {
@@ -22,8 +20,6 @@ static union mem_u {
 	uword_type uwords[MEMORY_SIZE_IN_WORDS];
 	bin_instr_t instrs[MEMORY_SIZE_IN_WORDS];
 } memory;
-
-
 
 // processing arguments
 char* findFileName(int arraySize, char** stringArray);
@@ -71,31 +67,51 @@ int main(int argc, char** argv)
         {
             printf("%6d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
         }
-        for(int i = 0; i < bofHeader.data_length; i++) 
-        {
-            // *** cut off after 2 consecutive zeros here ***
-            printf("%8d: %d\t", bofHeader.data_start_address + i, bof_read_word(boffile));
+
+		int prev_word = -1;
+		int bf_word = -1;
+		int next_word = -1;
+
+		// *** 3 or more data points with 0 replace with ellipses and keep first 0 ***
+        for (int i = 0; i < bofHeader.data_length; i + 2) 
+        {	
+			bf_word = bof_read_word(boffile);
+
+			if ((i + 1) < bofHeader.data_length)
+			{
+				next_word = bof_read_word(boffile); 	
+			}
+			
+			if  (prev_word == -1 || next_word == -1)
+			{
+				printf("%8d: %d\t", bofHeader.data_start_address + i, bf_word);
+			}
+			else if (prev_word == 0 && next_word == 0)
+			{
+				printf("...");
+			}
+			else
+			{
+            	printf("%8d: %d\t", bofHeader.data_start_address + i, bf_word);
+				printf("%8d: %d\t", bofHeader.data_start_address + i + 1, bf_word);
+			}
+			prev_word = next_word;
         }
 
+		// *** delete if not needed ***
         //bin_instr_t instruct = instruction_read(boffile);
-
-        printf("        ...");
     }
 
     // executing program and printing tracing output
     else
     {
-        // *** execute program here ***
-        /*
-            references
-            machine_execute_instr(bin_instr_t bi) in machine.c
-        */
-
         // *** add in \n after 59 char here ***
 
         for(int i = 0; i < bofHeader.text_length; i++) 
         {
 			address_type PC = bofHeader.text_start_address;
+			word_type HI = 1;
+			word_type LO = 0;
 			word_type* GPR = malloc(sizeof(word_type) * 8);
 			//Initialize GPR
 			for(int i = 0; i < 8; i++) {
@@ -104,23 +120,17 @@ int main(int argc, char** argv)
 			GPR[0] = bofHeader.data_start_address; //$gp
 			GPR[1] = bofHeader.stack_bottom_addr; //$sp
 			GPR[2] = bofHeader.stack_bottom_addr; //$fp 
+			
+			// *** PC value not working ***
             printf("        PC: %d\n", PC);
 
             bin_instr_t instruct = memory.instrs[i];
-            /*
-            instruct.comp;
-            instruct.immed;
-            instruct.jump;
-            instruct.othc;
-            instruct.syscall;
-            instruct.uimmed;
-            */
             instr_type it = instruction_type(instruct);
 
             switch (it) 
             {
                 case comp_instr_type:
-	            {
+				{
 	                comp_instr_t co = instruct.comp;
 					word_type t = instruct.comp.rt;
 					word_type s = instruct.comp.rs;
@@ -129,77 +139,249 @@ int main(int argc, char** argv)
 
 	                switch (co.func) {
 	                case ADD_F:
-						memory.words[GPR[t] + ot] = memory.words[GPR[1]] + memory.words[GPR[s] + os];
+						memory.words[GPR[t] + machine_types_formOffset(ot)] = memory.words[GPR[1]] + memory.words[GPR[s] + machine_types_formOffset(os)];
 					break;
 
 					case SUB_F:
-						memory.words[GPR[t] + ot] = memory.words[GPR[1]] - memory.words[GPR[s] + os];
+						memory.words[GPR[t] + machine_types_formOffset(ot)] = memory.words[GPR[1]] - memory.words[GPR[s] + machine_types_formOffset(os)];
 					break;
 
 					case CPW_F:
-						memory.words[GPR[t] + ot] = memory.words[GPR[s] + os];
+						memory.words[GPR[t] + machine_types_formOffset(ot)] = memory.words[GPR[s] + machine_types_formOffset(os)];
 					break;
 
 					case AND_F:
-						memory.uwords[GPR[t] + ot] = memory.uwords[GPR[1]] & memory.uwords[GPR[s] + os];
+						memory.uwords[GPR[t] + machine_types_formOffset(ot)] = memory.uwords[GPR[1]] & memory.uwords[GPR[s] + machine_types_formOffset(os)];
 					break;
 
 					case BOR_F:
-						memory.uwords[GPR[t] + ot] = memory.uwords[GPR[1]] | memory.uwords[GPR[s] + os];
+						memory.uwords[GPR[t] + machine_types_formOffset(ot)] = memory.uwords[GPR[1]] | memory.uwords[GPR[s] + machine_types_formOffset(os)];
 					break;
 
 					case NOR_F:
-						memory.uwords[GPR[t] + ot] = ~(memory.uwords[GPR[1]] | memory.uwords[GPR[s] + os]);
+						memory.uwords[GPR[t] + machine_types_formOffset(ot)] = ~(memory.uwords[GPR[1]] | memory.uwords[GPR[s] + machine_types_formOffset(os)]);
 					break;
 
 					case XOR_F:
-						memory.uwords[GPR[t] + ot] = memory.uwords[GPR[1]] ^ memory.uwords[GPR[s] + os];
+						memory.uwords[GPR[t] + machine_types_formOffset(ot)] = memory.uwords[GPR[1]] ^ memory.uwords[GPR[s] + machine_types_formOffset(os)];
 					break;
 
 					case LWR_F:
-						GPR[t] = memory.words[GPR[s] + os];
+						GPR[t] = memory.words[GPR[s] + machine_types_formOffset(os)];
 					break;
 
 					case SWR_F:
-						memory.words[GPR[t] + ot] = GPR[s];
+						memory.words[GPR[t] + machine_types_formOffset(ot)] = GPR[s];
 					break;
 
 					case SCA_F:
-						memory.words[GPR[t] + ot] = GPR[s] + os;
+						memory.words[GPR[t] + machine_types_formOffset(ot)] = GPR[s] + machine_types_formOffset(os);
 					break;
 
 					case LWI_F:
-						memory.words[GPR[t] + ot] = memory.words[memory.words[GPR[s] + os]];
+						memory.words[GPR[t] + machine_types_formOffset(ot)] = memory.words[memory.words[GPR[s] + machine_types_formOffset(os)]];
 					break;
 
 					case NEG_F:
-						memory.words[GPR[t] + ot] = -memory.words[GPR[s] + os];
-					break;		 	
-	                }
+						memory.words[GPR[t] + machine_types_formOffset(ot)] = -memory.words[GPR[s] + machine_types_formOffset(os)];
+					break;
 
+					default:
+						printf("Temporary Default");
+					break;
+					}
 	            }
-			break;
-    }
-            printf("\n");
-            printf("==> %6d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
+				break;
+				case other_comp_instr_type:
+				{
+					other_comp_instr_t oco = instruct.othc;
+					word_type op = instruct.othc.op;
+					word_type reg = instruct.othc.reg;
+					offset_type ot = instruct.othc.offset;
+					arg_type arg = instruct.othc.arg;
 
-			for (int i = 0; i < 8; i++) {
+					switch(oco.func) {
+						case LIT_F:
+							memory.words[GPR[reg] + ot] = machine_types_sgnExt(arg);
+						break;
+						
+						case ARI_F:
+							GPR[reg] = GPR[reg] + machine_types_sgnExt(arg);
+						break;
+
+						case SRI_F:
+							GPR[reg] = GPR[reg] - machine_types_sgnExt(arg);
+						break;
+
+						case MUL_F:
+							{
+							//Seperate HI and LO
+							int64_t result = (int64_t)((memory.words[GPR[reg] + machine_types_formOffset(ot)]) * (memory.words[GPR[1]]));
+							HI = (result >> 32);
+							LO = result;
+							}
+						break;
+
+						case DIV_F:
+							HI = memory.words[GPR[1]] % (memory.words[GPR[reg] + machine_types_formOffset(ot)]);
+							LO = memory.words[GPR[1]] / (memory.words[GPR[reg] + machine_types_formOffset(ot)]);
+						break;
+
+						case CFHI_F:
+							memory.words[GPR[reg] + machine_types_formOffset(ot)] = HI;
+						break;
+
+						case CFLO_F:
+							memory.words[GPR[reg] + machine_types_formOffset(ot)] = LO;
+						break;
+
+						case SLL_F:
+							memory.uwords[GPR[reg] + machine_types_formOffset(ot)] = memory.uwords[GPR[1]] << arg;
+						break;
+
+						case SRL_F:
+							memory.uwords[GPR[reg] + machine_types_formOffset(ot)] = memory.uwords[GPR[1]] >> arg;
+						break;
+
+						case JMP_F:
+							PC = memory.uwords[GPR[reg] + machine_types_formOffset(ot)];
+						break;
+
+						case CSI_F:
+							GPR[7] = PC;
+							PC = memory.words[GPR[reg] + machine_types_formOffset(ot)];
+						break;
+
+						case JREL_F:
+							PC = ((PC - 1) + machine_types_formOffset(ot));
+						break;
+						//See table seven for last thing
+						case SYS_F:
+						{
+							syscall_instr_t sys = instruct.syscall;
+							offset_type ot = sys.offset;
+							word_type reg = sys.reg;
+							
+							switch(sys.func) {
+								case exit_sc:
+									exit(machine_types_sgnExt(ot));
+								break;
+
+								case print_str_sc:
+									memory.words[GPR[1]] = printf("%s", &memory.words[GPR[reg] + machine_types_formOffset(ot)]);
+								break;
+
+								case print_int_sc:
+									memory.words[GPR[1]] = printf("%d", memory.words[GPR[reg] + machine_types_formOffset(ot)]);
+								break;
+
+								case print_char_sc:
+									memory.words[GPR[1]] = fputc(memory.words[GPR[reg] + machine_types_formOffset(ot)], stdout);
+								break;
+
+								case read_char_sc:
+									memory.words[GPR[reg] + machine_types_formOffset(ot)] = getc(stdin);
+								break; 
+
+								case start_tracing_sc:
+								break;
+
+								case stop_tracing_sc:
+								break;								
+							}
+						}
+						break;
+					}
+				}
+				
+			case immed_instr_type:
+			{
+				immed_instr_t imm = instruct.immed;
+				word_type reg = imm.reg;
+				immediate_type immed = imm.immed;
+				switch(imm.op)
+				{
+					case ADDI_O:
+					
+					
+					
+					break;
+
+					case ANDI_O:
+					//
+					break;
+
+					case BORI_O:
+					//
+					break;
+
+					case NORI_O:
+					//
+					break;
+
+					case BEQ_O:
+					//
+					break;
+
+					case BGEZ_O:
+
+					break;
+
+					case BGTZ_O:
+
+					break;
+
+					case BLEZ_O:
+					
+					break;
+
+					case BLTZ_O:
+
+					break;
+
+					case BNE_O:
+
+					break;
+
+
+					
+
+				
+
+				}
+			}
+
+		}	
+
+			// *** change to 59 char \n ***
+			for (int i = 0; i < 8; i++) 
+			{
         		printf("GPR[%s]: %-8d", regname_get(i), GPR[i]);
-        		if ((i + 1) % 4 == 0) 
+        		if ((i + 1) % 5 == 0) 
 					printf("\n");
     		}
 
+			printf("\n\n");
+			// moved above printf("==>") as opposed to below
 			bool printing_zeros = false;
-			for(int i = GPR[0]; i <= GPR[1]; i++) {
-				if (memory.words[i] == 0) {
-            		if (!printing_zeros) {
-                		printf("%8d:  %-8d\t...\n", i, memory.words[i]);
+			for(int i = GPR[0]; i <= GPR[1]; i++) 
+			{
+				if (memory.words[i] == 0) 
+				{
+            		if (!printing_zeros) 
+					{
+                		printf("%d:  %-8d\t...\n", i, memory.words[i]);
                 		printing_zeros = true;
             		}
 				}
 				else
 					printf("%8d: %-8d\n", i, memory.words[i]);
+					//printing_zeros
 			}
+
+            printf("==> %6d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
+
+			// *** prints dots incorrectly ***
         }
     }
 

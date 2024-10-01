@@ -62,6 +62,7 @@
     "locale": "c",
     "ostream": "c",
     "sstream": "c",
-    "streambuf": "c"
+    "streambuf": "c",
+    "bof.h": "c"
   }
 }

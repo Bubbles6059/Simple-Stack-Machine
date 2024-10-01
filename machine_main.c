@@ -134,36 +134,47 @@ int main(int argc, char** argv)
 					break;
 
 					case SUB_F:
+						memory.words[GPR[t] + ot] = memory.words[GPR[1]] - memory.words[GPR[s] + os];
 					break;
 
 					case CPW_F:
+						memory.words[GPR[t] + ot] = memory.words[GPR[s] + os];
 					break;
 
 					case AND_F:
+						memory.uwords[GPR[t] + ot] = memory.uwords[GPR[1]] & memory.uwords[GPR[s] + os];
 					break;
 
 					case BOR_F:
+						memory.uwords[GPR[t] + ot] = memory.uwords[GPR[1]] | memory.uwords[GPR[s] + os];
 					break;
 
 					case NOR_F:
+						memory.uwords[GPR[t] + ot] = ~(memory.uwords[GPR[1]] | memory.uwords[GPR[s] + os]);
 					break;
 
 					case XOR_F:
+						memory.uwords[GPR[t] + ot] = memory.uwords[GPR[1]] ^ memory.uwords[GPR[s] + os];
 					break;
 
 					case LWR_F:
+						GPR[t] = memory.words[GPR[s] + os];
 					break;
 
 					case SWR_F:
+						memory.words[GPR[t] + ot] = GPR[s];
 					break;
 
 					case SCA_F:
+						memory.words[GPR[t] + ot] = GPR[s] + os;
 					break;
 
 					case LWI_F:
+						memory.words[GPR[t] + ot] = memory.words[memory.words[GPR[s] + os]];
 					break;
 
 					case NEG_F:
+						memory.words[GPR[t] + ot] = -memory.words[GPR[s] + os];
 					break;		 	
 	                }
 

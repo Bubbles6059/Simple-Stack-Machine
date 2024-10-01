@@ -182,7 +182,24 @@ int main(int argc, char** argv)
     }
             printf("\n");
             printf("==> %6d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
-			printf("%d", memory.words[i]);
+
+			for (int i = 0; i < 8; i++) {
+        		printf("GPR[%s]: %-8d", regname_get(i), GPR[i]);
+        		if ((i + 1) % 4 == 0) 
+					printf("\n");
+    		}
+
+			bool printing_zeros = false;
+			for(int i = GPR[0]; i <= GPR[1]; i++) {
+				if (memory.words[i] == 0) {
+            		if (!printing_zeros) {
+                		printf("%8d:  %-8d\t...\n", i, memory.words[i]);
+                		printing_zeros = true;
+            		}
+				}
+				else
+					printf("%8d: %-8d\n", i, memory.words[i]);
+			}
         }
     }
 

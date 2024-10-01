@@ -55,15 +55,14 @@ int main(int argc, char** argv)
     
     BOFFILE boffile = bof_read_open(findFileName(argc, argv));
     BOFHeader bofHeader = bof_read_header(boffile);
-    
-    // loading program and printing
-    if(pFlagChecker(argc, argv)) 
-    {
-        for(int i = 0; i < bofHeader.text_length; i++) 
+    for(int i = 0; i < bofHeader.text_length; i++) 
         {
             memory.instrs[i] = instruction_read(boffile);
         }
 
+    // loading program and printing
+    if(pFlagChecker(argc, argv)) 
+    {
         // *** add in \n after 59 char here ***
 
         printf("Address Instruction\n");
@@ -183,6 +182,7 @@ int main(int argc, char** argv)
     }
             printf("\n");
             printf("==> %6d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
+			printf("%d", memory.words[i]);
         }
     }
 

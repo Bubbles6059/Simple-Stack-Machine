@@ -96,16 +96,17 @@ int main(int argc, char** argv)
 
         for(int i = 0; i < bofHeader.text_length; i++) 
         {
-			address_type PC = PC + BYTES_PER_WORD;
-			word_type GPR = malloc(sizeof(word_type) * 32);
+			address_type PC = bofHeader.text_start_address;
+			word_type* GPR = malloc(sizeof(word_type) * 8);
+			//Initialize GPR
+			for(int i = 0; i < 8; i++) {
+				GPR[i] = 0;
+			}
+			GPR[0] = bofHeader.data_start_address; //$gp
+			GPR[1] = bofHeader.stack_bottom_addr; //$sp
+			GPR[2] = bofHeader.stack_bottom_addr; //$fp 
             printf("        PC: %d\n", PC);
-            // *** print GPR[$gp, $sp, $fp, $r3, $r4, $r5, $r6, $ra] here ***
-            /*  
-                references 
-                unparseReg(reg_num_type n)  asm_unparser.c
-                regname_get                 regname.c 
 
-            */
             bin_instr_t instruct = memory.instrs[i];
             /*
             instruct.comp;
@@ -116,17 +117,51 @@ int main(int argc, char** argv)
             instruct.uimmed;
             */
             instr_type it = instruction_type(instruct);
+
             switch (it) 
             {
                 case comp_instr_type:
 	            {
 	                comp_instr_t co = instruct.comp;
 	                switch (co.func) {
-					//look tomorrow
 	                case ADD_F:
-						memory.words[GPR[co.ot]]
+						memory.words[]
 					break;
+
+					case SUB_F:
+					break;
+
+					case CPW_F:
+					break;
+
+					case AND_F:
+					break;
+
+					case BOR_F:
+					break;
+
+					case NOR_F:
+					break;
+
+					case XOR_F:
+					break;
+
+					case LWR_F:
+					break;
+
+					case SWR_F:
+					break;
+
+					case SCA_F:
+					break;
+
+					case LWI_F:
+					break;
+
+					case NEG_F:
+					break;		 	
 	                }
+
 	            }
 			break;
     }

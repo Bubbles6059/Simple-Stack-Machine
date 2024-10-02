@@ -1,0 +1,192 @@
+      PC: 0
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      0: ADDI $sp, -1, 1
+      PC: 1
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      1: CPW $sp, 0, $sp, -1
+      PC: 2
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      2: SLL $sp, -1, 20
+      PC: 3
+GPR[$gp]: 1024  GPR[$sp]: 4095  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      3: SRI $sp, 1
+      PC: 4
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      4: ADD $sp, 0, $gp, 0
+      PC: 5
+GPR[$gp]: 1024  GPR[$sp]: 4095  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      5: SRI $sp, 1
+      PC: 6
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    4096: 4       
+
+
+==>      6: LIT $sp, 0, 4
+      PC: 7
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 4     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    4096: 4       
+
+
+==>      7: LWR $r4, $sp, 0
+      PC: 8
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    4096: 14      
+
+
+==>      8: LIT $sp, 0, 14
+      PC: 9
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 14    GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    4096: 14      
+
+
+==>      9: LWR $r5, $sp, 0
+      PC: 10
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    4096: 14      
+
+
+==>     10: SWR $sp, -1, $r4
+      PC: 11
+GPR[$gp]: 1024  GPR[$sp]: 4094  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     11: ARI $sp, -2
+      PC: 12
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     12: SWR $sp, 0, $r5
+      PC: 13
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     13: DIV $sp, 1
+      PC: 14
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     14: CFLO $gp, 2
+      PC: 15
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+
+
+==>     15: CFHI $gp, 1
+      PC: 16
+GPR[$gp]: 1024  GPR[$sp]: 4095  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+
+
+==>     16: SRI $sp, 1
+      PC: 17
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+    4096: 1       
+
+
+==>     17: LIT $sp, 0, 1
+      PC: 18
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+    4096: 1024    
+
+
+==>     18: SLL $sp, 0, 10
+      PC: 19
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+    4096: 1024    
+
+
+==>     19: MUL $sp, 0
+      PC: 20
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+    4094: 1       
+    4096: 1024    
+
+
+==>     20: CFHI $sp, -2
+      PC: 21
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+    4094: 1       
+    4096: 1024    
+
+
+==>     21: CFLO $sp, -1
+      PC: 22
+GPR[$gp]: 1024  GPR[$sp]: 4094  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+    4094: 1       
+
+
+==>     22: SRI $sp, 2
+      PC: 23
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	    1025: 1       
+    4094: 1       
+    4096: 1024    
+
+
+==>     23: EXIT 0

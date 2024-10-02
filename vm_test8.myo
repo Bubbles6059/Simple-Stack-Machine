@@ -1,0 +1,76 @@
+      PC: 0
+GPR[$gp]: 256   GPR[$sp]: 1024  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	    1024: 17      
+
+
+==>      0: LIT $sp, 0, 17
+      PC: 1
+GPR[$gp]: 256   GPR[$sp]: 1024  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 17    
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	    1024: 17      
+
+
+==>      1: LWR $r4, $sp, 0
+      PC: 2
+GPR[$gp]: 256   GPR[$sp]: 1022  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	
+
+==>      2: SRI $sp, 2
+      PC: 3
+GPR[$gp]: 256   GPR[$sp]: 1024  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	    1024: 19      
+
+
+==>      3: LIT $sp, 0, 19
+      PC: 4
+GPR[$gp]: 256   GPR[$sp]: 1024  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 19    GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	    1024: 19      
+
+
+==>      4: LWR $r5, $sp, 0
+      PC: 5
+GPR[$gp]: 256   GPR[$sp]: 1024  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	    1023: 1024    
+    1024: 19      
+
+
+==>      5: SCA $sp, -1, $sp, 0
+      PC: 6
+GPR[$gp]: 256   GPR[$sp]: 1024  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	    1022: 19      
+    1023: 1024    
+    1024: 19      
+
+
+==>      6: LWI $sp, -2, $sp, -1
+      PC: 7
+GPR[$gp]: 256   GPR[$sp]: 1022  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	    1022: 19      
+
+
+==>      7: SRI $sp, 2
+      PC: 8
+GPR[$gp]: 256   GPR[$sp]: 1024  GPR[$fp]: 1024  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     256: 0	...
+    1024: 0	    1022: 19      
+    1023: 1024    
+    1024: 19      
+
+
+==>      8: EXIT 0

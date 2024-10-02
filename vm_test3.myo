@@ -1,0 +1,140 @@
+      PC: 0
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      0: STRA 
+      PC: 1
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      1: ADDI $sp, 0, 30
+      PC: 2
+GPR[$gp]: 1024  GPR[$sp]: 4095  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      2: SRI $sp, 1
+      PC: 3
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      3: ADDI $sp, 0, 20
+      PC: 4
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      4: ADDI $sp, 0, 10
+      PC: 5
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      5: BNE $sp, 1, 3	# target is word address 8
+      PC: 6
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 6     
+    1024: 0	...
+    4096: 0	
+
+==>      6: CALL 10	# target is word address 10
+      PC: 7
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      7: JMPA 18	# target is word address 18
+      PC: 8
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 8     
+    1024: 0	...
+    4096: 0	
+
+==>      8: CALL 13	# target is word address 13
+      PC: 9
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>      9: JMPA 18	# target is word address 18
+      PC: 10
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     10: NOTR 
+      PC: 11
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     11: PSTR $gp, 1
+      PC: 12
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     12: RTN 
+      PC: 13
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     13: NOTR 
+      PC: 14
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     14: PSTR $gp, 2
+      PC: 15
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     15: RTN 
+      PC: 16
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     16: STRA 
+      PC: 17
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     17: EXIT 1
+      PC: 18
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     18: STRA 
+      PC: 19
+GPR[$gp]: 1024  GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+    1024: 0	...
+    4096: 0	
+
+==>     19: EXIT 0

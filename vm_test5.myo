@@ -1,0 +1,241 @@
+      PC: 0
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      0: ADDI $sp, 0, 7
+      PC: 1
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      1: ADDI $sp, -1, 15
+      PC: 2
+GPR[$gp]: 512   GPR[$sp]: 4095  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      2: ARI $sp, -1
+      PC: 3
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      3: LWR $r4, $gp, 0
+      PC: 4
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      4: AND $sp, 0, $sp, 0
+      PC: 5
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      5: SLL $sp, 0, 5
+      PC: 6
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      6: ADDI $sp, 0, -405
+      PC: 7
+GPR[$gp]: 512   GPR[$sp]: 4095  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      7: SRI $sp, 1
+      PC: 8
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      8: ADDI $sp, 0, 2
+      PC: 9
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>      9: SLL $sp, 0, 7
+      PC: 10
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     10: SRL $sp, 0, 2
+      PC: 11
+GPR[$gp]: 512   GPR[$sp]: 4095  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     11: ARI $sp, -1
+      PC: 12
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	    4096: 11      
+
+
+==>     12: LIT $sp, 0, 11
+      PC: 13
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 11    GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	    4096: 11      
+
+
+==>     13: LWR $r5, $sp, 0
+      PC: 14
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     14: XOR $sp, 0, $sp, 0
+      PC: 15
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     15: SWR $sp, 0, $r5
+      PC: 16
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     16: NEG $sp, 0, $sp, 0
+      PC: 17
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     17: LIT $sp, 1, 75
+      PC: 18
+GPR[$gp]: 512   GPR[$sp]: 4097  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	    4097: 75      
+
+
+==>     18: ARI $sp, 1
+      PC: 19
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     19: BNE $sp, 1, 3	# target is word address 22
+      PC: 20
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 20    
+     512: 0	...
+    4096: 0	
+
+==>     20: CALL 26	# target is word address 26
+      PC: 21
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     21: JMPA 24	# target is word address 24
+      PC: 22
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 22    
+     512: 0	...
+    4096: 0	
+
+==>     22: CALL 30	# target is word address 30
+      PC: 23
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     23: JMPA 25	# target is word address 25
+      PC: 24
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     24: EXIT 0
+      PC: 25
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     25: EXIT 1
+      PC: 26
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     26: NOTR 
+      PC: 27
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     27: PSTR $gp, 5
+      PC: 28
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     28: STRA 
+      PC: 29
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     29: RTN 
+      PC: 30
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     30: NOTR 
+      PC: 31
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     31: PSTR $gp, 1
+      PC: 32
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     32: STRA 
+      PC: 33
+GPR[$gp]: 512   GPR[$sp]: 4096  GPR[$fp]: 4096  GPR[$r3]: 0     GPR[$r4]: 0     
+GPR[$r5]: 0     GPR[$r6]: 0     GPR[$ra]: 0     
+     512: 0	...
+    4096: 0	
+
+==>     33: RTN 

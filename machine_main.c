@@ -56,47 +56,77 @@ int main(int argc, char** argv)
             memory.instrs[i] = instruction_read(boffile);
         }
 
-    // loading program and printing
+    // loading program
     if(pFlagChecker(argc, argv)) 
     {
         // *** add in \n after 59 char here ***
 
         printf("Address Instruction\n");
 
+		// printing instructions
         for(int i = 0; i < bofHeader.text_length; i++) 
         {
             printf("%6d: %s\n", i, instruction_assembly_form(i, memory.instrs[i]));
         }
-
+		/*
 		int prev_word = -1;
 		int bf_word = -1;
 		int next_word = -1;
+		*/
+		int zeroCounter = 0;
+		int i = 0;
+		for (i = 0; i < bofHeader.data_length; i++) 
+		{
+			/*
+			word_type bofWord = bof_read_word(boffile);
+			if(bofWord == 0)
+				zeroCounter++;
+			if(zeroCounter < 2)
+				printf("%8d: %d", bofHeader.data_start_address + i, bofWord);
+			else
+				break;
+			*/
+		}
 
-		// *** 3 or more data points with 0 replace with ellipses and keep first 0 ***
-        for (int i = 0; i < bofHeader.data_length; i + 2) 
+
+		// printing data and words
+        /*for (int i = 0; i < bofHeader.data_length; i++) 
         {	
 			bf_word = bof_read_word(boffile);
 
+			// check next word exists
 			if ((i + 1) < bofHeader.data_length)
 			{
 				next_word = bof_read_word(boffile); 	
 			}
+			else
+			{
+				next_word = -1;
+			}
 			
-			if  (prev_word == -1 || next_word == -1)
+			// print only current if on first word or last
+			if (prev_word == -1 || next_word == -1)
 			{
 				printf("%8d: %d\t", bofHeader.data_start_address + i, bf_word);
 			}
-			else if (prev_word == 0 && next_word == 0)
+			
+			// print current and next
+			else if ((prev_word == 0) && (bf_word == 0) && (next_word == 0))
 			{
+				// 3 zeros in a row print ellipses
+				i++;
 				printf("...");
 			}
 			else
 			{
+				// otherwise print normal
             	printf("%8d: %d\t", bofHeader.data_start_address + i, bf_word);
-				printf("%8d: %d\t", bofHeader.data_start_address + i + 1, bf_word);
+				i++;
+				printf("%8d: %d\t", bofHeader.data_start_address + i, bf_word);
 			}
+			
 			prev_word = next_word;
-        }
+        }*/
 
 		// *** delete if not needed ***
         //bin_instr_t instruct = instruction_read(boffile);
@@ -122,6 +152,7 @@ int main(int argc, char** argv)
 			GPR[2] = bofHeader.stack_bottom_addr; //$fp 
 			
 			// *** PC value not working ***
+			PC+=i;
             printf("        PC: %d\n", PC);
 
             bin_instr_t instruct = memory.instrs[i];
@@ -298,56 +329,68 @@ int main(int argc, char** argv)
 			{
 				immed_instr_t imm = instruct.immed;
 				word_type reg = imm.reg;
+				word_type ot = imm.offset;
 				immediate_type immed = imm.immed;
 				switch(imm.op)
 				{
 					case ADDI_O:
-					
-					
-					
+						memory.words[GPR[reg] + machine_types_formOffset(ot)] = memory.words[GPR[reg] + machine_types_formOffset(ot) + machine_types_sgnExt(immed)];
+				
 					break;
 
 					case ANDI_O:
-					//
+						memory.uwords[GPR[reg] + machine_types_formOffset(ot)] = memory.uwords[GPR[reg] + machine_types_formOffset(ot) & machine_types_zeroExt(immed)];
 					break;
 
 					case BORI_O:
-					//
+						memory.uwords[GPR[reg] + machine_types_formOffset(ot)] = memory.uwords[GPR[reg] + machine_types_formOffset(ot) | machine_types_zeroExt(immed)];
 					break;
 
 					case NORI_O:
-					//
+						memory.uwords[GPR[reg] + machine_types_formOffset(ot)] = !memory.uwords[GPR[reg] + machine_types_formOffset(ot) | machine_types_zeroExt(immed)];
+					break;
+
+					case XORI_O:
+						memory.uwords[GPR[reg] + machine_types_formOffset(ot)] = memory.uwords[GPR[reg] + machine_types_formOffset(ot) ^ machine_types_zeroExt(immed)];
 					break;
 
 					case BEQ_O:
-					//
+						if (memory.words[GPR[1] = memory.words[GPR[reg] + machine_types_formOffset(ot)]]){
+							PC = ((PC - 1) + machine_types_formOffset(immed));
+						}
 					break;
 
 					case BGEZ_O:
-
+						if (memory.words[GPR[reg] + machine_types_formOffset(ot)] >= 0){
+							PC = ((PC - 1) + machine_types_formOffset(immed));
+						}
 					break;
 
 					case BGTZ_O:
-
+					if (memory.words[GPR[reg] + machine_types_formOffset(ot)] > 0 ){
+							PC = ((PC - 1) + machine_types_formOffset(immed));
+						}
 					break;
 
 					case BLEZ_O:
-					
+					if (memory.words[GPR[reg] + machine_types_formOffset(ot)] <= 0 ){
+							PC = ((PC - 1) + machine_types_formOffset(immed));
+						}
 					break;
 
 					case BLTZ_O:
-
+					if (memory.words[GPR[reg] + machine_types_formOffset(ot)] < 0 ){
+							PC = ((PC - 1) + machine_types_formOffset(immed));
+						}
+				
 					break;
 
 					case BNE_O:
+					if (memory.words[GPR[1] != memory.words[GPR[reg] + machine_types_formOffset(ot)]]){
+						PC = ((PC - 1) + machine_types_formOffset(immed));
+					}
 
 					break;
-
-
-					
-
-				
-
 				}
 			}
 
@@ -371,6 +414,7 @@ int main(int argc, char** argv)
             		if (!printing_zeros) 
 					{
                 		printf("%d:  %-8d\t...\n", i, memory.words[i]);
+						printf("%d:  %-8d\t", bofHeader.stack_bottom_addr, memory.words[i]);
                 		printing_zeros = true;
             		}
 				}
